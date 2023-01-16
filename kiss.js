@@ -9,10 +9,30 @@ kissBtn.addEventListener("click", function(){
   countEl.textContent = count
 })
 
+let prevArray = []
+
+
 saveBtn.addEventListener("click", function(){
   let prev = count + " - "
+  prevArray.push(prev)
   saveEl.textContent += prev
   countEl.textContent=0
   count = 0
+  
 
+  localStorage.setItem("prevArray", JSON.stringify(prevArray))
 })
+
+window.onload = function() {
+  
+  if (localStorage.getItem("prevArray")) {
+    let prevArray = JSON.parse(localStorage.getItem("prevArray"));
+      prevArray.forEach(function(prev){
+        saveEl.textContent += prev;
+
+      })
+      
+  }
+}
+
+
