@@ -2,6 +2,8 @@ const countEl = document.getElementById("count-el")
 const saveEl = document.getElementById("save-el")
 const kissBtn = document.querySelector(".kiss-btn")
 const saveBtn = document.querySelector(".save-btn")
+const deleteBtn = document.querySelector(".delete-btn")
+const deleteRecentBtn = document.querySelector(".delete-recent-btn")
 
 let count = 0
 kissBtn.addEventListener("click", function(){
@@ -36,3 +38,16 @@ window.onload = function() {
 }
 
 
+deleteBtn.addEventListener("click", function(){
+  prevArray = []
+  saveEl.textContent = ""
+  localStorage.removeItem("prevArray")
+  alert("Previous Entries Deleted!")
+})
+
+deleteRecentBtn.addEventListener("click", function(){
+  prevArray.pop()
+  saveEl.textContent = prevArray.join(" ")
+  localStorage.setItem("prevArray", JSON.stringify(prevArray));
+  alert("Recent Entry Deleted!")
+})
